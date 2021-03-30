@@ -80,6 +80,63 @@ def list_vehicles():
         "msg": "Hello, this is your GET /user response ",
         'data' : vehicles
     }
-
     return jsonify(response_body), 200
 
+
+@app.route('/addAll', methods=['POST'])
+def list_addAll():
+    body = request.get_json()
+    people = body['people'] 
+    planet = body['planet']
+    vehicles = body['vehicles']
+
+    for p in people:
+        people1 = People(
+            name = p["Character Name"],
+            heigth =p["Character heigth"],
+            mass = p["Character mass"],
+            hair_color = p["Character hair color"],
+            skin_color = p["Character skin color"],
+            eye_color = p["Caracter eye color"],
+            birth_year = p["Character birth year"],
+            gender = p["Character Gender"]
+
+        )
+        db.session.add(people1)
+
+    for pl in planet:
+        planet1 = Planet (
+            planet_name = pl["Planet Name"],
+            rotation_period = pl["Rotation Period"],
+            orbital_period= pl["orbital Period"],
+            diameter = pl["Diameter"],
+            climate = pl["Climate"],
+            gravity= pl["Gravity"],
+            terrain = pl["Terrain"],
+            population = pl["Population"]
+
+        )
+        db.session.add(planet1)
+
+    for v in vehicles:
+        vehicles1 = Vehicles (
+            vehicle_name = v["Vehicle name"],
+            model = v["Model"],
+            passengers = v["Passengers"],
+            consumable = v["consumable"],
+            starship_class = v["Starship class"],
+            length = v["Length"],
+            cargo_capacity = v["Cargo capacity"],
+            hyperdrive_rating = v["Hyperdrive rating"]
+
+        )
+        db.session.add(vehicles1)
+
+
+
+
+        db.session.commit()
+    
+if __name__ == '__main__':
+    PORT = int(os.environ.get('PORT', 3000))
+    app.run(host='0.0.0.0', port=PORT, debug=False)
