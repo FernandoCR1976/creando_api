@@ -77,7 +77,8 @@ def list_planet():
 @app.route('/vehicles', methods=['GET'])
 def list_vehicles():
     response_body = {
-        "msg": "Hello, this is your GET /user response "
+        "msg": "Hello, this is your GET /user response ",
+        'data' : vehicles
     }
 
     return jsonify(response_body), 200

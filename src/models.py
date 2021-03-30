@@ -22,7 +22,7 @@ class User(db.Model):
     user_name = db.Column(db.String(50), nullable=False)
     user_name = db.Column(db.String(50))
     email = db.Column(db.String(50))
-    user_Fav = db.relationship(User_Fav)    
+    #user_Fav = db.relationship(User_Fav)    
 
 class Planet(db.Model):
     __tablename__ = 'planet'
